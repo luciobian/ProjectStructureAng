@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { PasswordValidator } from 'src/app/shared/validators/PasswordValidator';
 import { AuthenticationService } from '../../core/authentication.service';
 @Component({
   selector: 'app-sign-in',
@@ -9,8 +10,8 @@ import { AuthenticationService } from '../../core/authentication.service';
 })
 export class SignInComponent {
   signInForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
+    username: new FormControl('', [Validators.required]),
+    password: new FormControl('', [Validators.required, PasswordValidator.pattern]),
   })
   constructor(private authService: AuthenticationService, private router: Router) {
 
