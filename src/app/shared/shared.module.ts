@@ -8,6 +8,7 @@ import { CoreModule } from '../core/core.module';
 import { ProductCardComponent } from './product-card/product-card.component';
 import { QuoteCardComponent } from './quote-card/quote-card.component';
 import { PostCardComponent } from './post-card/post-card.component';
+import { CardDirective } from './card-helpers/card.directive';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { PostCardComponent } from './post-card/post-card.component';
     GreetingPipe,
     ProductCardComponent,
     QuoteCardComponent,
-    PostCardComponent
+    PostCardComponent,
+    CardDirective,
   ],
   imports: [
     CommonModule,
@@ -31,7 +33,8 @@ import { PostCardComponent } from './post-card/post-card.component';
     ReactiveFormsModule,
     ProductCardComponent,
     QuoteCardComponent,
-    PostCardComponent
+    PostCardComponent,
+    CardDirective
   ]
 })
 export class SharedModule { }

@@ -1,13 +1,13 @@
 <div class="card m-3">
     <div class="row no-gutters">
         <div class="col-md-4">
-            <img [src]="item.imageUrl" class="card-img m-2" [alt]="item.name">
+            <img [src]="data.image" class="card-img m-2" [alt]="data.title">
         </div>
         <div class="col-md-8">
             <div class="card-body">
-                <h5 class="card-title">{{item.name}}</h5>
-                <p class="card-text text-secondary">{{item.description}}</p>
-                <p class="text-primary"> ${{item.price}} </p>
+                <h5 class="card-title">{{data.title}}</h5>
+                <p class="card-text text-secondary">{{data.description}}</p>
+                <p class="text-primary"> ${{data.price}} </p>
             </div>
         </div>
     </div>

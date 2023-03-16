@@ -1,6 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ComponentRef, OnInit, ViewChild } from '@angular/core';
 import { HomeService } from 'src/app/core/home.service';
-import { CardItem, Post, Product, Quote } from 'src/app/shared/card-helpers/card-item.model';
+import { CardItem } from 'src/app/shared/card-component-item';
+import { CardComponent } from 'src/app/shared/card-component.interface';
+import { CardDirective } from 'src/app/shared/card-helpers/card.directive';
+
+// import { PostCardComponent } from 'src/app/shared/post-card/post-card.component';
+// import { ProductCardComponent } from 'src/app/shared/product-card/product-card.component';
+// import { QuoteCardComponent } from 'src/app/shared/quote-card/quote-card.component';
 
 @Component({
   selector: 'app-home',
@@ -9,21 +15,24 @@ import { CardItem, Post, Product, Quote } from 'src/app/shared/card-helpers/card
 })
 export class HomeComponent implements OnInit {
   items!: CardItem[]
-  constructor(private _homeService: HomeService) { }
+  @ViewChild(CardDirective, { static: true }) cardDirective!: CardDirective;
+
+  constructor(private _homeService: HomeService) {
+  }
 
   ngOnInit(): void {
     this.items = this._homeService.getItems();
+    this.loadCards()
   }
 
-  isProduct(item: CardItem): item is Product {
-    return (item as Product).imageUrl !== undefined;
+  loadCards() {
+    this.items.forEach((cardCompItem) => {
+      let component: any = cardCompItem.component
+      const viewContainerRef = this.cardDirective.viewContainerRef;
+
+      const componentRef: ComponentRef<any> = viewContainerRef.createComponent<CardComponent>(new component().constructor);
+      componentRef.instance.data = cardCompItem.data;
+    });
   }
 
-  isPost(item: CardItem): item is Post {
-    return (item as Post).title !== undefined;
-  }
-
-  isQuote(item: CardItem): item is Quote {
-    return (item as Quote).text !== undefined;
-  }
 }

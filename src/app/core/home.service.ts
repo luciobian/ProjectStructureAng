@@ -1,44 +1,49 @@
 import { Injectable } from '@angular/core';
-import { CardItem, Post, Product, Quote } from '../shared/card-helpers/card-item.model';
+import { CardItem } from '../shared/card-component-item';
+import { PostCardComponent } from '../shared/post-card/post-card.component';
+import { ProductCardComponent } from '../shared/product-card/product-card.component';
+import { QuoteCardComponent } from '../shared/quote-card/quote-card.component';
 
 @Injectable()
 export class HomeService {
   public getItems(): CardItem[] {
     return [
-      {
-        title: 'My first post',
-        content: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempor ipsum in felis consequat vulputate.',
-        author: 'John Doe',
-        date: '2022-01-01'
-      } as Post,
-      {
-        name: 'Product A',
-        description: 'This is a great product that will solve all your problems.',
-        price: 9.99,
-        imageUrl: 'https://http2.mlstatic.com/D_NQ_NP_879794-MLA52004395332_102022-O.webp'
-      } as Product,
-      {
-        text: 'The only way to do great work is to love what you do.',
-        author: 'Steve Jobs',
-        date: '2022-02-15'
-      } as Quote,
-      {
-        title: 'My second post',
-        content: 'Sed vel ante justo. Donec auctor elit nec sapien tristique, ut hendrerit mauris venenatis. Nulla pharetra purus enim, eget cursus est dapibus eu.',
-        author: 'Jane Smith',
-        date: '2022-03-05'
-      } as Post,
-      {
-        name: 'Product B',
-        description: 'This is another great product that will solve all your problems.',
-        price: 19.99,
-        imageUrl: 'https://http2.mlstatic.com/D_NQ_NP_2X_805951-MLA50865156506_072022-F.webp'
-      } as Product,
-      {
-        text: 'Success is not final, failure is not fatal: it is the courage to continue that counts.',
-        author: 'Winston Churchill',
-        date: '2022-04-10'
-      } as Quote,
+      new CardItem(ProductCardComponent, {
+        title: 'Apple MacBook Pro 13"',
+        description:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+        image:
+          'https://i.ebayimg.com/images/g/N64AAOSwpClj-NNW/s-l500.jpg',
+        price: 29,
+      }),
+      new CardItem(PostCardComponent, {
+        title: 'Best indoor plants',
+        author: 'Dayana Jabif',
+        description: `Discover the best 10 indoor plants to add color and interest to every room with our easy-to-follow guide. 
+                Full of expert tips as to which house plants will survive best in your home, 
+                you can banish any worries of green fingered failures for good.`,
+        publishedDate: new Date('05-20-2022'),
+      }),
+      new CardItem(QuoteCardComponent, {
+        author: 'Marcus Tullius Cicero',
+        description: `If you have a garden and a library, you have everything you need.`,
+      }),
+      new CardItem(ProductCardComponent, {
+        title: 'Grey Pot',
+        description:
+          "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.",
+        image:
+          'https://i.ebayimg.com/images/g/dkQAAOSwlPRjiNbR/s-l500.png',
+        price: 22,
+      }),
+      new CardItem(QuoteCardComponent, {
+        author: 'Walter Hagen',
+        description: `You’re only here for a short visit. Don’t hurry, don’t worry. And be sure to smell the flowers along the way.`,
+      }),
+      new CardItem(QuoteCardComponent, {
+        author: ' Audrey Hepburn',
+        description: `To plant a garden is to believe in tomorrow.`,
+      }),
     ];
   }
 }
