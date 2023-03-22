@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { QuestionnaireService } from 'src/app/core/questionnaire.service';
+import { QuestionnaireService } from 'src/app/features/questionnaire/service/questionnaire.service';
 import { Address, Personal } from 'src/app/shared/form-helpers/form-helpers.model';
 
 @Component({
   selector: 'app-questionnaire',
   templateUrl: './questionnaire.component.html',
-  styleUrls: ['./questionnaire.component.css']
+  styleUrls: ['./questionnaire.component.css'],
+  providers: [QuestionnaireService]
 })
 export class QuestionnaireComponent implements OnInit {
   personalDataJson!: { controls: Personal[] };
@@ -22,17 +23,20 @@ export class QuestionnaireComponent implements OnInit {
   ngOnInit(): void {
     this.loadAddressJson()
     this.loadPersonalDataJson()
-    this.buildPersonalForm(this.personalDataJson)
-    this.buildAddressForm(this.addressJson)
-    console.log(this.personalDataJson, this.addressJson);
   }
 
   loadPersonalDataJson(): void {
-    this.personalDataJson = this._questionnaireService.getPersonalDetailsForm()
+    this._questionnaireService.getPersonalDetailsForm().subscribe((r) => {
+      this.personalDataJson = r;
+      this.buildPersonalForm(this.personalDataJson)
+    })
   }
 
   loadAddressJson(): void {
-    this.addressJson = this._questionnaireService.getAddressForm()
+    this._questionnaireService.getAddressForm().subscribe((r) => {
+      this.addressJson = r
+      this.buildAddressForm(this.addressJson)
+    })
   }
 
   private buildPersonalForm(formControls: { controls: Personal[] }): void {

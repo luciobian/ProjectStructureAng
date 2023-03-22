@@ -1,0 +1,34 @@
+{
+  "controls": [
+    {
+      "name": "firstName",
+      "label": "First name:",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "lastName",
+      "label": "Last name:",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "age",
+      "label": "Age",
+      "value": "",
+      "type": "number"
+    },
+    {
+      "name": "comments",
+      "label": "Comments",
+      "value": "",
+      "type": "textarea"
+    },
+    {
+      "name": "agreeTerms",
+      "label": "Accepts terms and conditions",
+      "value": "false",
+      "type": "checkbox"
+    }
+  ]
+}
