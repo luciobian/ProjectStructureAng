@@ -1,4 +1,5 @@
 {
+  "name": "Personal Details",
   "controls": [
     {
       "name": "firstName",

@@ -1,11 +1,9 @@
-export interface Personal {
+export interface FormModel {
     name: string;
-    label: string;
-    value: string;
-    type: string;
+    controls: FormControlModel[];
 }
 
-export interface Address {
+export interface FormControlModel {
     name: string;
     label: string;
     value: string;

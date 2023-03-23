@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { QuestionnaireService } from 'src/app/features/questionnaire/service/questionnaire.service';
-import { Address, Personal } from 'src/app/shared/form-helpers/form-helpers.model';
+import { FormModel } from 'src/app/shared/form-helpers/form-helpers.model';
 
 @Component({
   selector: 'app-questionnaire',
@@ -10,14 +10,13 @@ import { Address, Personal } from 'src/app/shared/form-helpers/form-helpers.mode
   providers: [QuestionnaireService]
 })
 export class QuestionnaireComponent implements OnInit {
-  personalDataJson!: { controls: Personal[] };
-  addressJson!: { controls: Address[] };
-  addressForm!: FormGroup;
-  personalDataForm!: FormGroup;
+  personalDataJson!: FormModel;
+  addressJson!: FormModel;
+  combinedJson!: FormModel[];
+  dynamicForm!: FormGroup;
 
   constructor(private _questionnaireService: QuestionnaireService, private formBuilder: FormBuilder) {
-    this.addressForm = this.formBuilder.group({});
-    this.personalDataForm = this.formBuilder.group({});
+    this.dynamicForm = this.formBuilder.group({});
   }
 
   ngOnInit(): void {
@@ -25,33 +24,29 @@ export class QuestionnaireComponent implements OnInit {
     this.loadPersonalDataJson()
   }
 
+  arrayData() {
+    return [this.personalDataJson, this.addressJson]
+  }
+
   loadPersonalDataJson(): void {
     this._questionnaireService.getPersonalDetailsForm().subscribe((r) => {
       this.personalDataJson = r;
-      this.buildPersonalForm(this.personalDataJson)
+      this.buildForm(this.personalDataJson)
     })
   }
 
   loadAddressJson(): void {
     this._questionnaireService.getAddressForm().subscribe((r) => {
       this.addressJson = r
-      this.buildAddressForm(this.addressJson)
+      this.buildForm(this.addressJson)
     })
   }
 
-  private buildPersonalForm(formControls: { controls: Personal[] }): void {
+  private buildForm(formControls: FormModel): void {
     formControls.controls.forEach(control => {
       const validators = control.type === 'checkbox' ? null : Validators.required;
       const controlValue = control.type === 'checkbox' ? false : control.value;
-      this.personalDataForm.addControl(control.name, this.formBuilder.control(controlValue, validators));
-    });
-  }
-
-  private buildAddressForm(formControls: { controls: Address[] }): void {
-    formControls.controls.forEach(control => {
-      const validators = control.type === 'checkbox' ? null : Validators.required;
-      const controlValue = control.type === 'checkbox' ? false : control.value;
-      this.addressForm.addControl(control.name, this.formBuilder.control(controlValue, validators));
+      this.dynamicForm.addControl(control.name, this.formBuilder.control(controlValue, validators));
     });
   }
 

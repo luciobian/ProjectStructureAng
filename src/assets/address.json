@@ -1,4 +1,5 @@
 {
+  "name": "Address",
   "controls": [
     {
       "name": "address1",
