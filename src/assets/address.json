@@ -1,0 +1,36 @@
+{
+  "name": "Address",
+  "controls": [
+    {
+      "name": "address1",
+      "label": "Address line 1:",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "address2",
+      "label": "Address line 2:",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "city",
+      "label": "City:",
+      "value": "",
+      "type": "text"
+    },
+    {
+      "name": "country",
+      "label": "Country:",
+      "value": "",
+      "type": "select",
+      "options": ["Uruguay", "Argentina", "Peru"]
+    },
+    {
+      "name": "zipcode",
+      "label": "ZIP",
+      "value": "",
+      "type": "number"
+    }
+  ]
+}

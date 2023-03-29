@@ -5,17 +5,38 @@
     <div class="form-group">
         <label for="name">Name: </label>
         <input id="name" type="text" class="form-control" formControlName="name">
+        <p *ngIf="signUpForm.get('name')?.errors?.['required'] && (signUpForm.get('name')?.dirty || signUpForm.get('name')?.touched)"
+            class="text-danger">Name is required.</p>
     </div>
     <div class="form-group">
         <label for="email">Email: </label>
         <input id="email" type="text" type="email" class="form-control" formControlName="email">
+        <div
+            *ngIf="signUpForm.get('email')?.invalid && (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)">
+            <p *ngIf="signUpForm.get('email')?.errors?.['required']" class="text-danger">Email is required.</p>
+            <p *ngIf="signUpForm.get('email')?.errors?.['email']" class="text-danger">Invalid email format.</p>
+        </div>
     </div>
     <div class="form-group">
         <label for="password">Password: </label>
-        <input id="password" type="text" type="password" class="form-control" formControlName="password">
+        <input id="password" type="password" class="form-control" formControlName="password">
+        <p *ngIf="signUpForm.get('password')?.errors && (signUpForm.get('password')?.dirty || signUpForm.get('password')?.touched)"
+            class="text-danger">
+            Password should be at least 6 characters. Password must have at least one number, one lowercase and
+            uppercase letter.
+        </p>
+
     </div>
     <div class="form-group">
-        <button type="submit" class="btn btn-primary m-2">Register</button>
-        <a routerLink="/sign-in">Sing In</a>
+        <label for="password">Confirm password: </label>
+        <input id="password" type="password" class="form-control" formControlName="confirmPassword">
+        <p *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.dirty"
+            class="text-danger">
+            Passwords missmatch.
+        </p>
     </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger mt-2" [disabled]="signUpForm.invalid">Sign up</button>
+    </div>
+    <a routerLink="/sign-in">Already have an account? Sing In</a>
 </form>
