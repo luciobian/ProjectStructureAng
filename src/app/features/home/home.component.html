@@ -1,1 +1,14 @@
-<p>Home Component!</p>
+<div class="text-center">
+    <h2 class="mb-4">Angular Challenge</h2>
+    <p class="mb-5">The following cards are created dynamically on the content of the item:</p>
+</div>
+<div class="container">
+    <!-- <ul class="list-unstyled">
+        <li *ngFor="let item of items"> -->
+    <ng-template appCard></ng-template>
+    <!-- <app-post-card *ngIf="isPost(item)" [item]="item"></app-post-card>
+            <app-product-card *ngIf="isProduct(item)" [item]="item"></app-product-card>
+            <app-quote-card *ngIf="isQuote(item)" [item]="item"></app-quote-card> -->
+    <!-- </li>
+    </ul> -->
+</div>

@@ -1,0 +1,14 @@
+<div class="card m-3">
+    <div class="row no-gutters">
+        <div class="card-body">
+            <h5 class="card-title">{{data.title}}</h5>
+            <p class="card-text text-secondary"> {{data.description}}</p>
+        </div>
+
+        <small>
+            Published by <span class="text-primary">{{data.author}}</span> on <span class="text-primary"> {{
+                data.publishedDate | date: 'dd/MM/yyyy'
+                }}</span>
+        </small>
+    </div>
+</div>
